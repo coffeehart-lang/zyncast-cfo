@@ -1,0 +1,18 @@
+import json
+import os
+from flask import Flask, render_template
+
+app = Flask(__name__)
+DB_FILE = os.path.expanduser("~/cfo_project/foreseen_vault.json")
+
+@app.route('/')
+def index():
+    if not os.path.exists(DB_FILE):
+        return "Vault data not found."
+    with open(DB_FILE, "r") as f:
+        data = json.load(f)
+    latest = data[-1] if data else {"date": "N/A", "metrics": {"runway": 0}}
+    return render_template('index.html', data=latest)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)

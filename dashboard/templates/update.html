@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zyncast - Update Financials</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121824;
+            color: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-card {
+            background-color: #1e293b;
+            border-radius: 12px;
+            padding: 35px;
+            border: 1px solid #334155;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        h2 { margin: 0; color: #f8fafc; }
+        .btn-cancel {
+            background-color: #334155;
+            color: #94a3b8;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .btn-cancel:hover { background-color: #475569; color: #f8fafc; }
+        .input-group { margin-bottom: 18px; }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #94a3b8;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus { outline: none; border-color: #38bdf8; }
+        .section-divider {
+            border-top: 1px solid #334155;
+            margin: 25px 0 20px 0;
+            padding-top: 15px;
+        }
+        .section-title {
+            font-size: 14px;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 0 0 15px 0;
+            font-weight: 600;
+        }
+        .btn-submit {
+            width: 100%;
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .btn-submit:hover { background-color: #7dd3fc; }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        <div class="header-row">
+{% if error %}
+            <div style="color: #f87171; background-color: rgba(248, 113, 113, 0.1); padding: 12px; border-radius: 8px; font-size: 14px; margin-bottom: 20px; text-align: center; border: 1px solid rgba(248, 113, 113, 0.2); font-weight: 500;">
+                {{ error }}
+            </div>
+        {% endif %}
+            <h2>Update Financials</h2>
+            <a href="/" class="btn-cancel">Cancel</a>
+        </div>
+        
+        <form method="POST">
+            <div class="input-group">
+                <label for="cash">Cash On Hand (USD)</label>
+                <input type="number" step="0.01" id="cash" name="cash" value="{{ data.metrics.cash }}" required>
+            </div>
+
+            <div class="section-divider">
+                <p class="section-title">Monthly Operating Expenses</p>
+            </div>
+
+            <div class="input-group">
+                <label for="exp_software">Software & Subscriptions (SaaS, Tax Software, AI)</label>
+                <input type="number" step="0.01" id="exp_software" name="exp_software" value="{{ data.metrics.categories.software if data.metrics.categories else 0 }}">
+            </div>
+
+            <div class="input-group">
+                <label for="exp_tools">Tools & Equipment Maintenance</label>
+                <input type="number" step="0.01" id="exp_tools" name="exp_tools" value="{{ data.metrics.categories.tools if data.metrics.categories else 0 }}">
+            </div>
+
+            <div class="input-group">
+                <label for="exp_marketing">Marketing & Admin (Domains, Legal, Ads)</label>
+                <input type="number" step="0.01" id="exp_marketing" name="exp_marketing" value="{{ data.metrics.categories.marketing if data.metrics.categories else 0 }}">
+            </div>
+
+            <div class="input-group">
+                <label for="exp_other">Other Operational Costs</label>
+                <input type="number" step="0.01" id="exp_other" name="exp_other" value="{{ data.metrics.categories.other if data.metrics.categories else 0 }}">
+            </div>
+
+            <button type="submit" class="btn-submit">Save and Update</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+[
+  {
+    "date": "2026-05-29",
+    "metrics": {
+      "runway": 4.5,
+      "cash": 10000,
+      "burn_rate": 2200,
+      "categories": {
+        "software": 500,
+        "tools": 300,
+        "marketing": 1000,
+        "other": 400
+      }
+    }
+  },
+  {
+    "date": "2026-05-30",
+    "metrics": {
+      "runway": 14.89,
+      "cash": 67000.0,
+      "burn_rate": 4500.0,
+      "categories": {
+        "software": 1200,
+        "tools": 800,
+        "marketing": 1500,
+        "other": 1000
+      }
+    }
+  }
+]

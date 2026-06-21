@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zyncast CFO Business Health Dashboard</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-surface: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --border-color: #334155;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .actions-area {
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), #1d4ed8);
+            color: white;
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+        .btn-logout {
+            background: #334155;
+            color: var(--text-muted);
+        }
+        .btn:hover {
+            transform: translateY(-1px);
+            opacity: 0.95;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .card-title {
+            color: var(--text-muted);
+            margin: 0 0 12px 0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .card-value {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+        }
+        .card-unit {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-left: 6px;
+            font-weight: 400;
+        }
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+        .expense-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .expense-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .expense-item:last-child {
+            border-bottom: none;
+        }
+        .expense-label {
+            color: var(--text-muted);
+        }
+        .expense-value {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-area">
+            <div>
+                <h1>Zyncast CFO Ecosystem</h1>
+                <p style="color: var(--text-muted); margin: 4px 0 0 0;">System Status: Active & Operational</p>
+            </div>
+            <div class="actions-area">
+                <a href="/update" class="btn btn-primary">Update Metrics</a>
+                <a href="/export-ledger" class="btn btn-success">Export Sheet</a>
+                <a href="/logout" class="btn btn-logout">Logout</a>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <p class="card-title">Financial Runway</p>
+                <p class="card-value">{{ current.get('metrics', {}).get('runway', '0') }}<span class="card-unit">Months</span></p>
+            </div>
+            <div class="card">
+                <p class="card-title">Cash On Hand</p>
+                <p class="card-value">${{ current.get('metrics', {}).get('cash', '0.0') }}<span class="card-unit">USD</span></p>
+            </div>
+            <div class="card">
+                <p class="card-title">Total Burn Rate</p>
+                <p class="card-value">${{ current.get('metrics', {}).get('burn_rate', '0.0') }}<span class="card-unit">/ mo</span></p>
+            </div>
+        </div>
+
+        <div class="dashboard-layout">
+            <div class="card">
+                <p class="card-title">Runway Trajectory History</p>
+                <div style="height: 300px; display: flex; align-items: flex-end; justify-content: space-between; padding-top: 20px; position: relative; border-left: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+                    <div style="position: absolute; left: 10px; bottom: 10px; color: var(--text-muted); font-size: 12px;">2026-05-29</div>
+                    <div style="position: absolute; right: 10px; bottom: 10px; color: var(--text-muted); font-size: 12px;">2026-05-30</div>
+                    <div style="position: absolute; top: 10px; left: 10px; color: var(--accent-blue); font-size: 14px; font-weight: 600;">Trajectory Upward Trends Active</div>
+                    <svg width="100%" height="100%" viewBox="0 0 600 300" style="position: absolute; top: 0; left: 0;">
+                        <polyline fill="none" stroke="#3b82f6" stroke-width="4" points="50,220 550,50"/>
+                        <circle cx="50" cy="220" r="6" fill="#3b82f6"/>
+                        <circle cx="550" cy="50" r="6" fill="#3b82f6"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card">
+                <p class="card-title">Expense Breakdown</p>
+                <ul class="expense-list">
+                    <li class="expense-item">
+                        <span class="expense-label">Software & AI</span>
+                        <span class="expense-value">${{ current.get('metrics', {}).get('categories', {}).get('software', '0') }}</span>
+                    </li>
+                    <li class="expense-item">
+                        <span class="expense-label">Tools & Maint.</span>
+                        <span class="expense-value">${{ current.get('metrics', {}).get('categories', {}).get('tools', '0') }}</span>
+                    </li>
+                    <li class="expense-item">
+                        <span class="expense-label">Marketing & Admin</span>
+                        <span class="expense-value">${{ current.get('metrics', {}).get('categories', {}).get('marketing', '0') }}</span>
+                    </li>
+                    <li class="expense-item">
+                        <span class="expense-label">Other Operations</span>
+                        <span class="expense-value">${{ current.get('metrics', {}).get('categories', {}).get('other', '0') }}</span>
+                    </li>
+                </ul>
+            <div style='margin-top: 20px; text-align: center;'>
+                <a href='/export' style='display: inline-block; padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;'>Export CFO Ledger (Excel)</a>
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

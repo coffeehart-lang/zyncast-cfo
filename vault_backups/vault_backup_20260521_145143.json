@@ -1,0 +1,18 @@
+[
+    {
+        "date": "2026-05-21 14:51:43",
+        "type": "Tax & Runway Analysis",
+        "metrics": {
+            "gross_revenue": 67000.0,
+            "cash_reserves": 6000.0,
+            "market_adjusted_opex": 25007.615999999998,
+            "net_retained_profit": 31942.384000000005,
+            "runway_months": 0.23992690866654384
+        },
+        "audited_strategic_moves": [
+            "[HIGH RISK] Shipping lanes unstable. Action: Lock in fixed-term carrier contracts immediately.",
+            "[RUNWAY ALERT] Cash safety runway narrow (< 1 mo). Action: Freeze all non-essential operational overhead instantly.",
+            "[RUNWAY ALERT] Action: Delay planned physical expansions or hardware purchases to maximize cash retention."
+        ]
+    }
+]
